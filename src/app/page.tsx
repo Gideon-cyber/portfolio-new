@@ -15,13 +15,18 @@ import logoAirbnb from '@/images/logos/airbnb.svg'
 import logoFacebook from '@/images/logos/facebook.svg'
 import logoPlanetaria from '@/images/logos/planetaria.svg'
 import logoStarbucks from '@/images/logos/starbucks.svg'
-import image1 from '@/images/photos/image-1.jpg'
-import image2 from '@/images/photos/image-2.jpg'
-import image3 from '@/images/photos/image-3.jpg'
-import image4 from '@/images/photos/image-4.jpg'
-import image5 from '@/images/photos/image-5.jpg'
+import logoTemlio from '@/images/logos/temlio_logo.png'
+import logoBytelabs from '@/images/logos/bytelabs.png'
+import logoDhelc from '@/images/logos/DHELC_logo.jpeg'
+import logoStealthStartup from '@/images/logos/stealth_startup_logo.jpeg'
+import image1 from '@/images/Image1.jpeg'
+import image2 from '@/images/Image2.jpeg'
+import image3 from '@/images/Image3.jpeg'
+import image5 from '@/images/Gideon.jpeg'
+import image4 from '@/images/Image7.jpeg'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
+import { subscribeToNewsletter } from '@/app/actions/newsletter'
 
 function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -113,7 +118,7 @@ function SocialLink({
 function Newsletter() {
   return (
     <form
-      action="/thank-you"
+      action={subscribeToNewsletter}
       className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
     >
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
@@ -128,6 +133,7 @@ function Newsletter() {
         <span className="flex min-w-0 flex-auto p-px">
           <input
             type="email"
+            name="email"
             placeholder="Email address"
             aria-label="Email address"
             required
@@ -162,7 +168,12 @@ function Role({ role }: { role: Role }) {
   return (
     <li className="flex gap-4">
       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-        <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
+        <Image
+          src={role.logo}
+          alt=""
+          className="h-7 w-7 rounded-full"
+          unoptimized
+        />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
@@ -192,7 +203,7 @@ function Resume() {
     {
       company: 'Temlio Telecommunications',
       title: 'Software Engineer',
-      logo: logoPlanetaria,
+      logo: logoTemlio,
       start: 'Dec 2024',
       end: {
         label: 'Present',
@@ -202,21 +213,21 @@ function Resume() {
     {
       company: 'Stealth Startup',
       title: 'Software Engineer',
-      logo: logoAirbnb,
+      logo: logoStealthStartup,
       start: 'Jul 2023',
       end: 'May 2025',
     },
     {
       company: 'Bytelabs Technologies',
       title: 'Software Engineer',
-      logo: logoFacebook,
+      logo: logoBytelabs,
       start: 'Sep 2022',
       end: 'Dec 2024',
     },
     {
       company: 'DHELC Business Solutions',
       title: 'Software Engineer',
-      logo: logoStarbucks,
+      logo: logoDhelc,
       start: 'Jun 2021',
       end: 'Sep 2022',
     },
@@ -291,19 +302,23 @@ export default async function Home() {
             high-growth technology startups.
           </p>
           <div className="mt-6 flex gap-6">
-            <SocialLink href="#" aria-label="Follow on X" icon={XIcon} />
             <SocialLink
-              href="#"
+              href="https://x.com/Gideon_cyber"
+              aria-label="Follow on X"
+              icon={XIcon}
+            />
+            {/* <SocialLink
+              href="https://www.instagram.com/gideon_cyber/"
               aria-label="Follow on Instagram"
               icon={InstagramIcon}
-            />
+            /> */}
             <SocialLink
-              href="#"
+              href="https://github.com/Gideon-cyber"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
             />
             <SocialLink
-              href="#"
+              href="https://www.linkedin.com/in/gideon-nwokpor"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
             />

@@ -14,7 +14,7 @@ import {
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import avatarImage from '@/images/avatar.jpg'
+import avatarImage from '@/images/Image8.jpeg'
 
 function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -123,10 +123,10 @@ function MobileNavigation(
           <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
             <MobileNavItem href="/about">About</MobileNavItem>
             <MobileNavItem href="/experience">Experience</MobileNavItem>
-            {/* <MobileNavItem href="/articles">Articles</MobileNavItem> */}
+            <MobileNavItem href="/articles">Articles</MobileNavItem>
             <MobileNavItem href="/projects">Projects</MobileNavItem>
-            <MobileNavItem href="/speaking">Speaking</MobileNavItem>
-            <MobileNavItem href="/uses">Uses</MobileNavItem>
+            {/* <MobileNavItem href="/speaking">Speaking</MobileNavItem> */}
+            {/* <MobileNavItem href="/uses">Uses</MobileNavItem> */}
           </ul>
         </nav>
       </PopoverPanel>
@@ -171,8 +171,8 @@ function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
         <NavItem href="/experience">Experience</NavItem>
         <NavItem href="/articles">Articles</NavItem>
         <NavItem href="/projects">Projects</NavItem>
-        <NavItem href="/speaking">Speaking</NavItem>
-        <NavItem href="/uses">Uses</NavItem>
+        {/* <NavItem href="/speaking">Speaking</NavItem> */}
+        {/* <NavItem href="/uses">Uses</NavItem> */}
       </ul>
     </nav>
   )

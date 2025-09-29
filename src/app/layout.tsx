@@ -7,12 +7,12 @@ import '@/styles/tailwind.css'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Spencer Sharp',
+    template: '%s - Gideon Nwokpor',
     default:
-      'Spencer Sharp - Software designer, founder, and amateur astronaut',
+      'Gideon Nwokpor - Software Engineer, Full Stack Developer, and Web3 Innovator',
   },
   description:
-    'I’m Spencer, a software designer and entrepreneur based in New York City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms.',
+    "I'm Gideon Nwokpor, a results-driven Software Engineer with over 6 years of experience architecting, building, and maintaining scalable web and mobile applications across fintech, edtech, telecommunications, e-commerce, and Web3 industries. I've guided teams of 5-15 members through 5+ product launches at high-growth technology startups.",
   alternates: {
     types: {
       'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,

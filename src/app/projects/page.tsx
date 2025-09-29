@@ -8,6 +8,12 @@ import logoCosmos from '@/images/logos/cosmos.svg'
 import logoHelioStream from '@/images/logos/helio-stream.svg'
 import logoOpenShuttle from '@/images/logos/open-shuttle.svg'
 import logoPlanetaria from '@/images/logos/planetaria.svg'
+import logoTemlio from '@/images/logos/temlio_logo.png'
+import logoBytelabs from '@/images/logos/bytelabs.png'
+import logoDhelc from '@/images/logos/DHELC_logo.jpeg'
+import logoStealthStartup from '@/images/logos/stealth_startup_logo.jpeg'
+import logoCronkcro from '@/images/logos/cronkcro.webp'
+import logoComlio from '@/images/logos/comlio.png'
 
 const projects = [
   {
@@ -18,7 +24,7 @@ const projects = [
       href: 'https://cronk-landingpage.vercel.app/',
       label: 'cronk-landingpage.vercel.app',
     },
-    logo: logoCosmos,
+    logo: logoCronkcro,
     technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Redux', 'Web3'],
   },
   {
@@ -29,7 +35,7 @@ const projects = [
       href: 'https://staking-front-vandal-prog.vercel.app/home',
       label: 'staking-front-vandal-prog.vercel.app',
     },
-    logo: logoHelioStream,
+    logo: logoOpenShuttle,
     technologies: [
       'React.js',
       'SCSS',
@@ -47,7 +53,7 @@ const projects = [
       href: 'https://startup-sphere.vercel.app/',
       label: 'startup-sphere.vercel.app',
     },
-    logo: logoOpenShuttle,
+    logo: logoStealthStartup,
     technologies: ['React.js', 'Tailwind CSS', 'Web3.js', 'Formik', 'Yup'],
   },
   {
@@ -55,7 +61,7 @@ const projects = [
     description:
       'Centralized messaging system unifying phone, email, SMS, and social media into one inbox. Built with React.js and Node.js, reducing platform context-switching by 100%.',
     link: { href: '#', label: 'Enterprise Solution' },
-    logo: logoPlanetaria,
+    logo: logoTemlio,
     technologies: ['React.js', 'Node.js', 'MongoDB', 'WebSocket'],
   },
   {
@@ -63,7 +69,7 @@ const projects = [
     description:
       'Cross-platform educational app with AI tutoring capabilities. Led team of 6 engineers, accelerating release velocity by 35% using React Native and React.js.',
     link: { href: '#', label: 'Stealth Startup' },
-    logo: logoAnimaginary,
+    logo: logoStealthStartup,
     technologies: ['React Native', 'React.js', 'AI/ML', 'REST APIs'],
   },
   {
@@ -71,7 +77,7 @@ const projects = [
     description:
       'Scalable fintech integration platform enabling rapid client onboarding. Reduced integration time by 50% with optimized UX and component libraries.',
     link: { href: '#', label: 'Bytelabs Technologies' },
-    logo: logoHelioStream,
+    logo: logoBytelabs,
     technologies: ['React.js', 'TypeScript', 'PostgreSQL', 'Microservices'],
   },
   {
@@ -79,7 +85,7 @@ const projects = [
     description:
       'Blockchain-based authentication using DID and OAuth2, reducing identity fraud attempts by 50%. Built with Web3 technologies and smart contracts.',
     link: { href: '#', label: 'Web3 Solution' },
-    logo: logoCosmos,
+    logo: logoCronkcro,
     technologies: ['Solidity', 'Web3.js', 'Ether.js', 'DID', 'OAuth2'],
   },
   {
@@ -87,7 +93,7 @@ const projects = [
     description:
       'Business intelligence platform providing SMEs with key metrics visibility. Drove 50% more data-informed decisions with interactive visualizations.',
     link: { href: '#', label: 'Analytics Platform' },
-    logo: logoOpenShuttle,
+    logo: logoComlio,
     technologies: ['React.js', 'D3.js', 'Node.js', 'Real-time APIs'],
   },
   {
@@ -95,7 +101,7 @@ const projects = [
     description:
       'Intelligent ticketing module with status tracking, automated reminders, and smart assignment logic. Decreased unaddressed tickets by 95%.',
     link: { href: '#', label: 'Support System' },
-    logo: logoAnimaginary,
+    logo: logoComlio,
     technologies: ['React.js', 'Node.js', 'MongoDB', 'WebSocket'],
   },
 ]
@@ -133,7 +139,7 @@ export default function Projects() {
               <Image
                 src={project.logo}
                 alt=""
-                className="h-8 w-8"
+                className="h-8 w-8 rounded-full"
                 unoptimized
               />
             </div>

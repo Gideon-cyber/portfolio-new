@@ -4,12 +4,8 @@ import Link from 'next/link'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import {
-  GitHubIcon,
-  LinkedInIcon,
-  XIcon,
-} from '@/components/SocialIcons'
-import portraitImage from '@/images/portrait.jpg'
+import { GitHubIcon, LinkedInIcon, XIcon } from '@/components/SocialIcons'
+import portraitImage from '@/images/Image4.jpeg'
 
 function SocialLink({
   className,
@@ -27,6 +23,8 @@ function SocialLink({
       <Link
         href={href}
         className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
         <span className="ml-4">{children}</span>
@@ -49,7 +47,7 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'I\'m Gideon Nwokpor. Software Engineer and Full Stack Developer with over 6 years of experience building scalable applications.',
+    "I'm Gideon Nwokpor. Software Engineer and Full Stack Developer with over 6 years of experience building scalable applications.",
 }
 
 export default function About() {
@@ -67,50 +65,68 @@ export default function About() {
           </div>
         </div>
         <div className="lg:order-first lg:row-span-2">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
             I&apos;m Gideon Nwokpor. Software Engineer and Full Stack Developer.
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              Results-driven Software Engineer with over 6 years of experience architecting, building, and maintaining
-              scalable web and mobile applications across fintech, edtech, telecommunications, e-commerce, and Web3 industries.
-              I&apos;ve guided teams of 5-15 members through 5+ product launches at high-growth technology startups.
+              Results-driven Software Engineer with over 6 years of experience
+              architecting, building, and maintaining scalable web and mobile
+              applications across fintech, edtech, telecommunications,
+              e-commerce, and Web3 industries. I&apos;ve guided teams of 5-15
+              members through 5+ product launches at high-growth technology
+              startups.
             </p>
             <p>
-              My expertise spans across modern JavaScript frameworks like React.js, Next.js, and React Native,
-              as well as backend technologies including Node.js and various databases. I have a strong background
-              in Web3 technologies, working with Ethereum, smart contracts, and decentralized identity systems.
+              My expertise spans across modern JavaScript frameworks like
+              React.js, Next.js, and React Native, as well as backend
+              technologies including Node.js and various databases. I have a
+              strong background in Web3 technologies, working with Ethereum,
+              smart contracts, and decentralized identity systems.
             </p>
             <p>
-              Currently, I&apos;m working at Temlio Telecommunications where I&apos;ve engineered a centralized messaging system
-              that reduced platform context-switching by 100% and developed ticketing modules that decreased unaddressed
-              customer tickets by 95%. I&apos;m passionate about building solutions that make a real impact on businesses and users.
+              Currently, I&apos;m working at Temlio Telecommunications where
+              I&apos;ve engineered a centralized messaging system that reduced
+              platform context-switching by 100% and developed ticketing modules
+              that decreased unaddressed customer tickets by 95%. I&apos;m
+              passionate about building solutions that make a real impact on
+              businesses and users.
             </p>
             <p>
-              When I&apos;m not coding, I enjoy mentoring junior developers, contributing to open-source projects,
-              and staying up-to-date with the latest developments in blockchain technology and AI.
-              I hold a BSc in Biochemistry from the University of Ibadan, which gives me a unique analytical
-              perspective on problem-solving in software development.
+              When I&apos;m not coding, I enjoy mentoring junior developers,
+              contributing to open-source projects, and staying up-to-date with
+              the latest developments in blockchain technology and AI. I hold a
+              BSc in Biochemistry from the University of Ibadan, which gives me
+              a unique analytical perspective on problem-solving in software
+              development.
             </p>
           </div>
         </div>
         <div className="lg:pl-20">
           <ul role="list">
-            <SocialLink href="#" icon={XIcon}>
+            <SocialLink href="https://x.com/Gideon_cyber" icon={XIcon}>
               Follow on X
             </SocialLink>
-            <SocialLink href="#" icon={GitHubIcon} className="mt-4">
+            <SocialLink
+              href="https://github.com/Gideon-cyber"
+              icon={GitHubIcon}
+              className="mt-4"
+            >
               Follow on GitHub
             </SocialLink>
-            <SocialLink href="#" icon={LinkedInIcon} className="mt-4">
+            <SocialLink
+              href="https://linkedin.com/in/gideon-nwokpor"
+              icon={LinkedInIcon}
+              className="mt-4"
+            >
               Follow on LinkedIn
             </SocialLink>
             <SocialLink
-              href="mailto:gideon@example.com"
+              href="mailto:gidnwokpor@gmail.com"
               icon={MailIcon}
               className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
             >
-              gideon@example.com
+              gidnwokpor@gmail.com
             </SocialLink>
           </ul>
         </div>
