@@ -22,14 +22,17 @@ export function Card<T extends React.ElementType = 'div'>({
   as?: T
   className?: string
 }) {
-  let Component = as ?? 'div'
+  let Component = (as ?? 'div') as React.ElementType
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const AnyComponent = Component as any
 
   return (
-    <Component
+    <AnyComponent
       className={clsx(className, 'group relative flex flex-col items-start')}
     >
       {children}
-    </Component>
+    </AnyComponent>
   )
 }
 
@@ -56,7 +59,8 @@ Card.Title = function CardTitle<T extends React.ElementType = 'h2'>({
   as?: T
   href?: string
 }) {
-  let Component = as ?? 'h2'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Component = (as ?? 'h2') as any
 
   return (
     <Component className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
@@ -99,7 +103,8 @@ Card.Eyebrow = function CardEyebrow<T extends React.ElementType = 'p'>({
   as?: T
   decorate?: boolean
 }) {
-  let Component = as ?? 'p'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Component = (as ?? 'p') as any
 
   return (
     <Component

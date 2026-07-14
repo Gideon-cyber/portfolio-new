@@ -109,16 +109,17 @@ export async function getHashnodeArticles(
     })
 
     if (!response.ok) {
-      const errorText = await response.text()
-      throw new Error(
-        `HTTP error! status: ${response.status}, body: ${errorText}`,
-      )
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const contentType = response.headers.get('content-type') ?? ''
+    if (!contentType.includes('application/json')) {
+      return []
     }
 
     const data: HashnodeResponse = await response.json()
 
     if (data.errors) {
-      console.error('GraphQL errors:', data.errors)
       return []
     }
 
@@ -267,21 +268,22 @@ export async function getUserHashnodeArticles(
     })
 
     if (!response.ok) {
-      const errorText = await response.text()
-      throw new Error(
-        `HTTP error! status: ${response.status}, body: ${errorText}`,
-      )
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const contentType = response.headers.get('content-type') ?? ''
+    if (!contentType.includes('application/json')) {
+      // API returned HTML (rate limit, auth redirect, etc.) — skip gracefully
+      return []
     }
 
     const data: any = await response.json()
 
     if (data.errors) {
-      console.error('GraphQL errors:', data.errors)
       return []
     }
 
     if (!data.data?.user?.posts?.edges) {
-      console.warn(`No posts found for user: ${username}`)
       return []
     }
 

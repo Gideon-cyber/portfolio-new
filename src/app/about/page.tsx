@@ -1,48 +1,9 @@
 import { type Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
-import clsx from 'clsx'
 
-import { Container } from '@/components/Container'
-import { GitHubIcon, LinkedInIcon, XIcon } from '@/components/SocialIcons'
+import { FadeInWhenVisible } from '@/components/motion/FadeInWhenVisible'
+import { ContactSection } from '@/components/sections/ContactSection'
 import portraitImage from '@/images/Image4.jpeg'
-
-function SocialLink({
-  className,
-  href,
-  children,
-  icon: Icon,
-}: {
-  className?: string
-  href: string
-  children: React.ReactNode
-  icon: React.ComponentType<{ className?: string }>
-}) {
-  return (
-    <li className={clsx(className, 'flex')}>
-      <Link
-        href={href}
-        className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
-        <span className="ml-4">{children}</span>
-      </Link>
-    </li>
-  )
-}
-
-function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        fillRule="evenodd"
-        d="M6 5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6Zm.245 2.187a.75.75 0 0 0-.99 1.126l6.25 5.5a.75.75 0 0 0 .99 0l6.25-5.5a.75.75 0 0 0-.99-1.126L12 12.251 6.245 7.187Z"
-      />
-    </svg>
-  )
-}
 
 export const metadata: Metadata = {
   title: 'About',
@@ -50,87 +11,139 @@ export const metadata: Metadata = {
     "I'm Gideon Nwokpor. Software Engineer and Full Stack Developer with over 6 years of experience building scalable applications.",
 }
 
+const socialLinks = [
+  {
+    href: 'https://x.com/Gideon_cyber',
+    label: 'X (Twitter)',
+    handle: '@gidnwokpor',
+  },
+  {
+    href: 'https://github.com/Gideon-cyber',
+    label: 'GitHub',
+    handle: 'Gideon-cyber',
+  },
+  {
+    href: 'https://linkedin.com/in/gideon-nwokpor',
+    label: 'LinkedIn',
+    handle: 'gideon-nwokpor',
+  },
+  {
+    href: 'mailto:gidnwokpor@gmail.com',
+    label: 'Email',
+    handle: 'gidnwokpor@gmail.com',
+  },
+]
+
+const bio = [
+  `Results-driven Software Engineer with over 6 years of experience architecting, building, and maintaining scalable web and mobile applications across fintech, edtech, telecommunications, e-commerce, and Web3 industries. I've guided teams of 5–15 members through 5+ product launches at high-growth technology startups.`,
+  `My expertise spans modern JavaScript frameworks — React.js, Next.js, React Native — along with backend technologies including Node.js and databases like MongoDB, PostgreSQL, and Firestore. I have a strong background in Web3, working with Ethereum, smart contracts, and decentralized identity systems.`,
+  `Currently at Temlio Telecommunications, where I engineered a centralized messaging system that reduced platform context-switching by 100% and developed ticketing modules that decreased unaddressed customer tickets by 95%.`,
+  `When I'm not coding, I enjoy mentoring junior developers, contributing to open-source projects, and staying up-to-date with the latest in blockchain and AI. I hold a BSc in Biochemistry from the University of Ibadan — giving me a unique analytical lens on software problem-solving.`,
+]
+
 export default function About() {
   return (
-    <Container className="mt-16 sm:mt-32">
-      <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
-        <div className="lg:pl-20">
-          <div className="max-w-xs px-2.5 lg:max-w-none">
-            <Image
-              src={portraitImage}
-              alt=""
-              sizes="(min-width: 1024px) 32rem, 20rem"
-              className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
-            />
+    <>
+      <div className="min-h-screen bg-[#0A0A0A] pt-24 pb-20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          {/* Page label */}
+          <FadeInWhenVisible>
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-[#00D4FF]">
+              About Me
+            </p>
+          </FadeInWhenVisible>
+
+          <div className="mt-12 grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-24">
+            {/* Left — text */}
+            <div className="flex flex-col justify-center">
+              <FadeInWhenVisible delay={0.05}>
+                <h1 className="font-[family-name:var(--font-syne)] text-4xl font-extrabold leading-tight tracking-tight text-[#F5F5F5] sm:text-5xl">
+                  Software Engineer. Web3 Builder. Problem Solver.
+                </h1>
+              </FadeInWhenVisible>
+
+              <div className="mt-8 space-y-5">
+                {bio.map((paragraph, i) => (
+                  <FadeInWhenVisible key={i} delay={0.1 + i * 0.07}>
+                    <p className="text-base leading-relaxed text-[#A1A1A1]">
+                      {paragraph}
+                    </p>
+                  </FadeInWhenVisible>
+                ))}
+              </div>
+
+              {/* Social links */}
+              <FadeInWhenVisible delay={0.4}>
+                <div className="mt-10 border-t border-[#1A1A1A] pt-10">
+                  <h2 className="mb-5 text-xs font-semibold tracking-widest uppercase text-[#525252]">
+                    Connect
+                  </h2>
+                  <ul className="space-y-3">
+                    {socialLinks.map((link) => (
+                      <li key={link.label}>
+                        <a
+                          href={link.href}
+                          target={link.href.startsWith('mailto') ? undefined : '_blank'}
+                          rel="noopener noreferrer"
+                          className="group flex items-center justify-between rounded-lg border border-[#1A1A1A] bg-[#111111] px-4 py-3 transition-colors hover:border-[#00D4FF]/30 hover:bg-[#00D4FF]/5"
+                        >
+                          <span className="text-sm font-medium text-[#A1A1A1] group-hover:text-[#F5F5F5]">
+                            {link.label}
+                          </span>
+                          <span className="text-sm text-[#525252] group-hover:text-[#00D4FF]">
+                            {link.handle}
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </FadeInWhenVisible>
+            </div>
+
+            {/* Right — portrait */}
+            <FadeInWhenVisible delay={0.15}>
+              <div className="relative">
+                {/* Glow */}
+                <div className="absolute inset-0 -z-10 scale-75 rounded-full bg-[#00D4FF] opacity-[0.05] blur-3xl" />
+
+                <div className="relative overflow-hidden rounded-2xl">
+                  <Image
+                    src={portraitImage}
+                    alt="Gideon Nwokpor"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="w-full object-cover"
+                    priority
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
+                </div>
+
+                {/* Stat chips */}
+                <div className="mt-6 grid grid-cols-3 gap-3">
+                  {[
+                    { value: '6+', label: 'Years' },
+                    { value: '9+', label: 'Projects' },
+                    { value: '4', label: 'Companies' },
+                  ].map((stat) => (
+                    <div
+                      key={stat.label}
+                      className="rounded-xl border border-[#1A1A1A] bg-[#111111] p-4 text-center"
+                    >
+                      <p className="font-[family-name:var(--font-syne)] text-2xl font-bold text-[#00D4FF]">
+                        {stat.value}
+                      </p>
+                      <p className="mt-0.5 text-xs text-[#525252]">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeInWhenVisible>
           </div>
-        </div>
-        <div className="lg:order-first lg:row-span-2">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            I&apos;m Gideon Nwokpor. Software Engineer and Full Stack Developer.
-          </h1>
-          <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
-            <p>
-              Results-driven Software Engineer with over 6 years of experience
-              architecting, building, and maintaining scalable web and mobile
-              applications across fintech, edtech, telecommunications,
-              e-commerce, and Web3 industries. I&apos;ve guided teams of 5-15
-              members through 5+ product launches at high-growth technology
-              startups.
-            </p>
-            <p>
-              My expertise spans across modern JavaScript frameworks like
-              React.js, Next.js, and React Native, as well as backend
-              technologies including Node.js and various databases. I have a
-              strong background in Web3 technologies, working with Ethereum,
-              smart contracts, and decentralized identity systems.
-            </p>
-            <p>
-              Currently, I&apos;m working at Temlio Telecommunications where
-              I&apos;ve engineered a centralized messaging system that reduced
-              platform context-switching by 100% and developed ticketing modules
-              that decreased unaddressed customer tickets by 95%. I&apos;m
-              passionate about building solutions that make a real impact on
-              businesses and users.
-            </p>
-            <p>
-              When I&apos;m not coding, I enjoy mentoring junior developers,
-              contributing to open-source projects, and staying up-to-date with
-              the latest developments in blockchain technology and AI. I hold a
-              BSc in Biochemistry from the University of Ibadan, which gives me
-              a unique analytical perspective on problem-solving in software
-              development.
-            </p>
-          </div>
-        </div>
-        <div className="lg:pl-20">
-          <ul role="list">
-            <SocialLink href="https://x.com/Gideon_cyber" icon={XIcon}>
-              Follow on X
-            </SocialLink>
-            <SocialLink
-              href="https://github.com/Gideon-cyber"
-              icon={GitHubIcon}
-              className="mt-4"
-            >
-              Follow on GitHub
-            </SocialLink>
-            <SocialLink
-              href="https://linkedin.com/in/gideon-nwokpor"
-              icon={LinkedInIcon}
-              className="mt-4"
-            >
-              Follow on LinkedIn
-            </SocialLink>
-            <SocialLink
-              href="mailto:gidnwokpor@gmail.com"
-              icon={MailIcon}
-              className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
-            >
-              gidnwokpor@gmail.com
-            </SocialLink>
-          </ul>
         </div>
       </div>
-    </Container>
+
+      <ContactSection />
+    </>
   )
 }

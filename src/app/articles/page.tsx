@@ -1,7 +1,7 @@
 import { type Metadata } from 'next'
+import Link from 'next/link'
 
-import { Card } from '@/components/Card'
-import { SimpleLayout } from '@/components/SimpleLayout'
+import { FadeInWhenVisible } from '@/components/motion/FadeInWhenVisible'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 
@@ -15,93 +15,113 @@ function getValidDateTimeAttribute(dateString: string): string | undefined {
   }
 }
 
-function Article({ article }: { article: ArticleWithSlug }) {
-  const isExternal = article.isExternal
-
+function ArticleCard({ article }: { article: ArticleWithSlug }) {
   return (
-    <article className="md:grid md:grid-cols-4 md:items-baseline">
-      <Card className="md:col-span-3">
-        <Card.Title href={`/articles/${article.slug}`}>
-          <span className="flex items-center gap-2">
-            {article.title}
-            {isExternal && (
-              <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-                Hashnode
-              </span>
+    <FadeInWhenVisible>
+      <article className="group relative border-b border-[#1A1A1A] py-8 first:border-t">
+        <div className="flex flex-col gap-3 md:flex-row md:items-baseline md:gap-8">
+          {/* Date — desktop left column */}
+          <time
+            dateTime={getValidDateTimeAttribute(article.date)}
+            className="flex-none text-xs font-medium tabular-nums tracking-widest text-[#525252] md:w-32"
+          >
+            {formatDate(article.date)}
+          </time>
+
+          {/* Content */}
+          <div className="flex-1">
+            <div className="flex flex-wrap items-start gap-2">
+              <h2 className="font-[family-name:var(--font-syne)] text-xl font-bold text-[#F5F5F5] transition-colors group-hover:text-[#00D4FF]">
+                <Link href={`/articles/${article.slug}`}>
+                  <span className="absolute inset-0" aria-hidden="true" />
+                  {article.title}
+                </Link>
+              </h2>
+              {article.isExternal && (
+                <span className="rounded-full border border-[#00D4FF]/20 bg-[#00D4FF]/5 px-2 py-0.5 text-xs font-medium text-[#00D4FF]">
+                  Hashnode
+                </span>
+              )}
+            </div>
+
+            <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#A1A1A1]">
+              {article.description}
+            </p>
+
+            {article.tags && article.tags.length > 0 && (
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {article.tags.slice(0, 3).map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-[#262626] bg-[#1A1A1A] px-2.5 py-0.5 text-xs text-[#525252]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             )}
-          </span>
-        </Card.Title>
 
-        <Card.Eyebrow
-          as="time"
-          dateTime={getValidDateTimeAttribute(article.date)}
-          className="md:hidden"
-          decorate
-        >
-          {formatDate(article.date)}
-        </Card.Eyebrow>
-        <Card.Description>{article.description}</Card.Description>
-
-        {article.tags && article.tags.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-1">
-            {article.tags.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center rounded-full bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200"
-              >
-                {tag}
+            <div className="mt-3 flex items-center gap-4">
+              {article.readTime && (
+                <span className="text-xs text-[#525252]">{article.readTime} min read</span>
+              )}
+              {article.views && (
+                <span className="text-xs text-[#525252]">{article.views.toLocaleString()} views</span>
+              )}
+              <span className="ml-auto flex items-center gap-1 text-xs font-medium text-[#00D4FF] opacity-0 transition-opacity group-hover:opacity-100">
+                {article.isExternal ? 'Read on Hashnode' : 'Read article'}
+                <svg viewBox="0 0 16 16" fill="none" className="h-3 w-3">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </span>
-            ))}
+            </div>
           </div>
-        )}
-
-        {(article.readTime || article.views) && (
-          <div className="mt-4 flex items-center gap-4 text-sm text-zinc-500 dark:text-zinc-400">
-            {article.readTime && <span>{article.readTime} min read</span>}
-            {article.views && (
-              <span>{article.views.toLocaleString()} views</span>
-            )}
-          </div>
-        )}
-
-        <Card.Cta>{isExternal ? 'Read on Hashnode' : 'Read article'}</Card.Cta>
-      </Card>
-      <Card.Eyebrow
-        as="time"
-        dateTime={getValidDateTimeAttribute(article.date)}
-        className="mt-1 max-md:hidden"
-      >
-        {formatDate(article.date)}
-      </Card.Eyebrow>
-    </article>
+        </div>
+      </article>
+    </FadeInWhenVisible>
   )
 }
 
 export const metadata: Metadata = {
   title: 'Articles',
   description:
-    'My thoughts on software engineering, Web3 development, full-stack architecture, and technology trends, from both my portfolio and Hashnode blog.',
+    'Thoughts on software engineering, Web3 development, full-stack architecture, and technology — from my portfolio and Hashnode blog.',
 }
 
 export default async function ArticlesIndex() {
-  let articles = await getAllArticles()
+  const articles = await getAllArticles()
 
   return (
-    <SimpleLayout
-      title="Writing on software engineering, Web3, and technology."
-      intro="My thoughts on software engineering, Web3 development, full-stack architecture, and technology trends. Articles are pulled from both my portfolio and Hashnode blog, sorted chronologically."
-    >
-      <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
-        <div className="flex max-w-3xl flex-col space-y-16">
+    <div className="min-h-screen bg-[#0A0A0A] pt-24 pb-20">
+      <div className="mx-auto max-w-4xl px-6 lg:px-8">
+        {/* Header */}
+        <FadeInWhenVisible>
+          <p className="text-sm font-medium tracking-[0.2em] uppercase text-[#00D4FF]">
+            Writing
+          </p>
+        </FadeInWhenVisible>
+        <FadeInWhenVisible delay={0.05}>
+          <h1 className="mt-4 font-[family-name:var(--font-syne)] text-4xl font-extrabold leading-tight tracking-tight text-[#F5F5F5] sm:text-5xl">
+            Writing on Software Engineering & Web3.
+          </h1>
+        </FadeInWhenVisible>
+        <FadeInWhenVisible delay={0.1}>
+          <p className="mt-4 text-base leading-relaxed text-[#A1A1A1]">
+            Thoughts on software engineering, Web3, full-stack architecture, and technology trends — pulled from my portfolio and Hashnode blog.
+          </p>
+        </FadeInWhenVisible>
+
+        {/* Articles */}
+        <div className="mt-16">
           {articles.length === 0 ? (
-            <div className="text-center">
-              <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                No articles found. Check back soon for new content!
+            <FadeInWhenVisible delay={0.15}>
+              <p className="text-sm text-[#525252]">
+                No articles found. Check back soon!
               </p>
-            </div>
+            </FadeInWhenVisible>
           ) : (
             articles.map((article) => (
-              <Article
+              <ArticleCard
                 key={`${article.isExternal ? 'hashnode' : 'local'}-${article.slug}`}
                 article={article}
               />
@@ -109,6 +129,6 @@ export default async function ArticlesIndex() {
           )}
         </div>
       </div>
-    </SimpleLayout>
+    </div>
   )
 }

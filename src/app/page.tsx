@@ -1,150 +1,43 @@
 import Image, { type ImageProps } from 'next/image'
 import Link from 'next/link'
-import clsx from 'clsx'
 
-import { Button } from '@/components/Button'
-import { Card } from '@/components/Card'
-import { Container } from '@/components/Container'
-import {
-  GitHubIcon,
-  InstagramIcon,
-  LinkedInIcon,
-  XIcon,
-} from '@/components/SocialIcons'
-import logoAirbnb from '@/images/logos/airbnb.svg'
-import logoFacebook from '@/images/logos/facebook.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
-import logoStarbucks from '@/images/logos/starbucks.svg'
+import { HeroSection } from '@/components/hero/HeroSection'
+import { ContactSection } from '@/components/sections/ContactSection'
+import { FadeInWhenVisible } from '@/components/motion/FadeInWhenVisible'
 import logoTemlio from '@/images/logos/temlio_logo.png'
 import logoBytelabs from '@/images/logos/bytelabs.png'
 import logoDhelc from '@/images/logos/DHELC_logo.jpeg'
 import logoStealthStartup from '@/images/logos/stealth_startup_logo.jpeg'
-import image1 from '@/images/Image1.jpeg'
-import image2 from '@/images/Image2.jpeg'
-import image3 from '@/images/Image3.jpeg'
-import image5 from '@/images/Gideon.jpeg'
-import image4 from '@/images/Image7.jpeg'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 import { subscribeToNewsletter } from '@/app/actions/newsletter'
 
-function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-      <path
-        d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
-
-function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-      <path
-        d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
-
-function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M4.75 8.75 8 12.25m0 0 3.25-3.5M8 12.25v-8.5"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
 function Article({ article }: { article: ArticleWithSlug }) {
   return (
-    <Card as="article">
-      <Card.Title href={`/articles/${article.slug}`}>
-        {article.title}
-      </Card.Title>
-      <Card.Eyebrow as="time" dateTime={article.date} decorate>
-        {formatDate(article.date)}
-      </Card.Eyebrow>
-      <Card.Description>{article.description}</Card.Description>
-      <Card.Cta>Read article</Card.Cta>
-    </Card>
-  )
-}
-
-function SocialLink({
-  icon: Icon,
-  ...props
-}: React.ComponentPropsWithoutRef<typeof Link> & {
-  icon: React.ComponentType<{ className?: string }>
-}) {
-  return (
-    <Link className="group -m-1 p-1" {...props}>
-      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
-    </Link>
-  )
-}
-
-function Newsletter() {
-  return (
-    <form
-      action={subscribeToNewsletter}
-      className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
-    >
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <MailIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Stay connected</span>
-      </h2>
-      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Get updates on my latest projects, insights into Web3 development, and
-        tips on building scalable applications.
-      </p>
-      <div className="mt-6 flex items-center">
-        <span className="flex min-w-0 flex-auto p-px">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email address"
-            aria-label="Email address"
-            required
-            className="w-full appearance-none rounded-[calc(var(--radius-md)-1px)] bg-white px-3 py-[calc(--spacing(2)-1px)] shadow-md shadow-zinc-800/5 outline outline-zinc-900/10 placeholder:text-zinc-400 focus:ring-4 focus:ring-teal-500/10 focus:outline-teal-500 sm:text-sm dark:bg-zinc-700/15 dark:text-zinc-200 dark:outline-zinc-700 dark:placeholder:text-zinc-500 dark:focus:ring-teal-400/10 dark:focus:outline-teal-400"
-          />
-        </span>
-        <Button type="submit" className="ml-4 flex-none">
-          Join
-        </Button>
-      </div>
-    </form>
+    <FadeInWhenVisible>
+      <article className="group relative border-b border-[#1A1A1A] py-8 first:border-t">
+        <div className="flex flex-col gap-3">
+          <p className="text-xs font-medium tracking-widest uppercase text-[#525252]">
+            <time dateTime={article.date}>{formatDate(article.date)}</time>
+          </p>
+          <h3 className="font-[family-name:var(--font-syne)] text-xl font-bold text-[#F5F5F5] transition-colors group-hover:text-[#00D4FF]">
+            <Link href={`/articles/${article.slug}`}>
+              <span className="absolute inset-0" />
+              {article.title}
+            </Link>
+          </h3>
+          <p className="line-clamp-2 text-sm leading-relaxed text-[#A1A1A1]">
+            {article.description}
+          </p>
+          <p className="mt-1 flex items-center gap-1 text-xs font-medium text-[#00D4FF]">
+            Read article
+            <svg viewBox="0 0 16 16" fill="none" className="h-3 w-3 transition-transform group-hover:translate-x-0.5">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </p>
+        </div>
+      </article>
+    </FadeInWhenVisible>
   )
 }
 
@@ -152,193 +45,180 @@ interface Role {
   company: string
   title: string
   logo: ImageProps['src']
-  start: string | { label: string; dateTime: string }
-  end: string | { label: string; dateTime: string }
+  start: string
+  end: string
 }
 
-function Role({ role }: { role: Role }) {
-  let startLabel =
-    typeof role.start === 'string' ? role.start : role.start.label
-  let startDate =
-    typeof role.start === 'string' ? role.start : role.start.dateTime
+const resume: Role[] = [
+  {
+    company: 'Temlio Telecommunications',
+    title: 'Software Engineer',
+    logo: logoTemlio,
+    start: 'Dec 2024',
+    end: 'Present',
+  },
+  {
+    company: 'Stealth Startup',
+    title: 'Software Engineer',
+    logo: logoStealthStartup,
+    start: 'Jul 2023',
+    end: 'May 2025',
+  },
+  {
+    company: 'Bytelabs Technologies',
+    title: 'Software Engineer',
+    logo: logoBytelabs,
+    start: 'Sep 2022',
+    end: 'Dec 2024',
+  },
+  {
+    company: 'DHELC Business Solutions',
+    title: 'Software Engineer',
+    logo: logoDhelc,
+    start: 'Jun 2021',
+    end: 'Sep 2022',
+  },
+]
 
-  let endLabel = typeof role.end === 'string' ? role.end : role.end.label
-  let endDate = typeof role.end === 'string' ? role.end : role.end.dateTime
-
+function NewsletterForm() {
   return (
-    <li className="flex gap-4">
-      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-        <Image
-          src={role.logo}
-          alt=""
-          className="h-7 w-7 rounded-full"
-          unoptimized
+    <form
+      action={subscribeToNewsletter}
+      className="rounded-2xl border border-[#1A1A1A] bg-[#111111] p-6"
+    >
+      <h3 className="font-[family-name:var(--font-syne)] text-base font-bold text-[#F5F5F5]">
+        Stay in the Loop
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-[#A1A1A1]">
+        Get updates on my latest projects, Web3 insights, and engineering deep
+        dives.
+      </p>
+      <div className="mt-5 flex gap-2">
+        <input
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          aria-label="Email address"
+          required
+          className="min-w-0 flex-1 rounded-lg border border-[#262626] bg-[#0A0A0A] px-4 py-2.5 text-sm text-[#F5F5F5] placeholder-[#525252] outline-none transition-colors focus:border-[#00D4FF] focus:ring-1 focus:ring-[#00D4FF]/30"
         />
-      </div>
-      <dl className="flex flex-auto flex-wrap gap-x-2">
-        <dt className="sr-only">Company</dt>
-        <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
-          {role.company}
-        </dd>
-        <dt className="sr-only">Role</dt>
-        <dd className="text-xs text-zinc-500 dark:text-zinc-400">
-          {role.title}
-        </dd>
-        <dt className="sr-only">Date</dt>
-        <dd
-          className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-          aria-label={`${startLabel} until ${endLabel}`}
+        <button
+          type="submit"
+          className="rounded-lg bg-[#00D4FF] px-4 py-2.5 text-sm font-semibold text-[#0A0A0A] transition-colors hover:bg-[#00D4FF]/90"
         >
-          <time dateTime={startDate}>{startLabel}</time>{' '}
-          <span aria-hidden="true">—</span>{' '}
-          <time dateTime={endDate}>{endLabel}</time>
-        </dd>
-      </dl>
-    </li>
-  )
-}
-
-function Resume() {
-  let resume: Array<Role> = [
-    {
-      company: 'Temlio Telecommunications',
-      title: 'Software Engineer',
-      logo: logoTemlio,
-      start: 'Dec 2024',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
-    {
-      company: 'Stealth Startup',
-      title: 'Software Engineer',
-      logo: logoStealthStartup,
-      start: 'Jul 2023',
-      end: 'May 2025',
-    },
-    {
-      company: 'Bytelabs Technologies',
-      title: 'Software Engineer',
-      logo: logoBytelabs,
-      start: 'Sep 2022',
-      end: 'Dec 2024',
-    },
-    {
-      company: 'DHELC Business Solutions',
-      title: 'Software Engineer',
-      logo: logoDhelc,
-      start: 'Jun 2021',
-      end: 'Sep 2022',
-    },
-  ]
-
-  return (
-    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
-      </h2>
-      <ol className="mt-6 space-y-4">
-        {resume.map((role, roleIndex) => (
-          <Role key={roleIndex} role={role} />
-        ))}
-      </ol>
-      <Button
-        href="/experience"
-        variant="secondary"
-        className="group mt-6 w-full"
-      >
-        View Experience
-        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
-      </Button>
-    </div>
-  )
-}
-
-function Photos() {
-  let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
-
-  return (
-    <div className="mt-16 sm:mt-20">
-      <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-        {[image1, image2, image3, image4, image5].map((image, imageIndex) => (
-          <div
-            key={image.src}
-            className={clsx(
-              'relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800',
-              rotations[imageIndex % rotations.length],
-            )}
-          >
-            <Image
-              src={image}
-              alt=""
-              sizes="(min-width: 640px) 18rem, 11rem"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </div>
-        ))}
+          Join
+        </button>
       </div>
-    </div>
+    </form>
   )
 }
 
 export default async function Home() {
-  let articles = (await getAllArticles()).slice(0, 4)
+  const articles = (await getAllArticles()).slice(0, 4)
 
   return (
     <>
-      <Container className="mt-9">
-        <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            Software Engineer, Full Stack Developer, and Web3 Innovator.
-          </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m Gideon Nwokpor, a results-driven Software Engineer with
-            over 6 years of experience architecting, building, and maintaining
-            scalable web and mobile applications across fintech, edtech,
-            telecommunications, e-commerce, and Web3 industries. I&apos;ve
-            guided teams of 5-15 members through 5+ product launches at
-            high-growth technology startups.
-          </p>
-          <div className="mt-6 flex gap-6">
-            <SocialLink
-              href="https://x.com/Gideon_cyber"
-              aria-label="Follow on X"
-              icon={XIcon}
-            />
-            {/* <SocialLink
-              href="https://www.instagram.com/gideon_cyber/"
-              aria-label="Follow on Instagram"
-              icon={InstagramIcon}
-            /> */}
-            <SocialLink
-              href="https://github.com/Gideon-cyber"
-              aria-label="Follow on GitHub"
-              icon={GitHubIcon}
-            />
-            <SocialLink
-              href="https://www.linkedin.com/in/gideon-nwokpor"
-              aria-label="Follow on LinkedIn"
-              icon={LinkedInIcon}
-            />
+      <HeroSection />
+
+      {/* Articles + Sidebar */}
+      <section className="border-t border-[#1A1A1A] bg-[#0A0A0A] px-6 py-20 lg:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_360px] lg:gap-12">
+            {/* Articles */}
+            <div>
+              <FadeInWhenVisible>
+                <div className="flex items-center justify-between">
+                  <h2 className="font-[family-name:var(--font-syne)] text-2xl font-bold text-[#F5F5F5]">
+                    Latest Writing
+                  </h2>
+                  <Link
+                    href="/articles"
+                    className="text-sm text-[#00D4FF] transition-colors hover:text-[#00D4FF]/80"
+                  >
+                    View all →
+                  </Link>
+                </div>
+              </FadeInWhenVisible>
+
+              {articles.length > 0 ? (
+                articles.map((article) => (
+                  <Article key={article.slug} article={article} />
+                ))
+              ) : (
+                <FadeInWhenVisible delay={0.1}>
+                  <p className="mt-8 text-sm text-[#525252]">
+                    Articles coming soon.{' '}
+                    <a
+                      href="https://hashnode.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#00D4FF] hover:underline"
+                    >
+                      Follow on Hashnode
+                    </a>
+                  </p>
+                </FadeInWhenVisible>
+              )}
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-8">
+              <FadeInWhenVisible>
+                <NewsletterForm />
+              </FadeInWhenVisible>
+
+              {/* Work history */}
+              <FadeInWhenVisible delay={0.1}>
+                <div className="rounded-2xl border border-[#1A1A1A] bg-[#111111] p-6">
+                  <h3 className="font-[family-name:var(--font-syne)] text-base font-bold text-[#F5F5F5]">
+                    Work History
+                  </h3>
+                  <ol className="mt-5 space-y-5">
+                    {resume.map((role, i) => (
+                      <li key={i} className="flex items-start gap-4">
+                        <div className="flex h-9 w-9 flex-none items-center justify-center overflow-hidden rounded-full border border-[#262626] bg-[#1A1A1A]">
+                          <Image
+                            src={role.logo}
+                            alt={role.company}
+                            width={28}
+                            height={28}
+                            className="h-7 w-7 rounded-full object-cover"
+                            unoptimized
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-[#F5F5F5] truncate">
+                            {role.company}
+                          </p>
+                          <p className="text-xs text-[#A1A1A1]">{role.title}</p>
+                        </div>
+                        <p className="flex-none text-xs text-[#525252]">
+                          {role.end === 'Present' ? (
+                            <span className="text-[#00D4FF]">Now</span>
+                          ) : (
+                            role.end
+                          )}
+                        </p>
+                      </li>
+                    ))}
+                  </ol>
+                  <Link
+                    href="/experience"
+                    className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg border border-[#262626] py-2.5 text-sm font-medium text-[#A1A1A1] transition-colors hover:border-[#404040] hover:text-[#F5F5F5]"
+                  >
+                    View full experience
+                    <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                </div>
+              </FadeInWhenVisible>
+            </div>
           </div>
         </div>
-      </Container>
-      <Photos />
-      <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16">
-            {articles.map((article) => (
-              <Article key={article.slug} article={article} />
-            ))}
-          </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Newsletter />
-            <Resume />
-          </div>
-        </div>
-      </Container>
+      </section>
+
+      <ContactSection />
     </>
   )
 }

@@ -1,0 +1,8 @@
+export { SmoothScroll } from './SmoothScroll'
+export { PageTransition } from './PageTransition'
+export { TextReveal } from './TextReveal'
+export { FadeInWhenVisible } from './FadeInWhenVisible'
+export { MagneticButton } from './MagneticButton'
+export { ParallaxImage } from './ParallaxImage'
+export { CountUp } from './CountUp'
+export { HorizontalScroll } from './HorizontalScroll'

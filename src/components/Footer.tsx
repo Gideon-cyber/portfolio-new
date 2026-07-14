@@ -1,47 +1,41 @@
 import Link from 'next/link'
 
-import { ContainerInner, ContainerOuter } from '@/components/Container'
-
-function NavLink({
-  href,
-  children,
-}: {
-  href: string
-  children: React.ReactNode
-}) {
-  return (
-    <Link
-      href={href}
-      className="transition hover:text-teal-500 dark:hover:text-teal-400"
-    >
-      {children}
-    </Link>
-  )
-}
+const navLinks = [
+  { href: '/about', label: 'About' },
+  { href: '/experience', label: 'Experience' },
+  { href: '/articles', label: 'Articles' },
+  { href: '/projects', label: 'Projects' },
+]
 
 export function Footer() {
   return (
-    <footer className="mt-32 flex-none">
-      <ContainerOuter>
-        <div className="border-t border-zinc-100 pt-10 pb-16 dark:border-zinc-700/40">
-          <ContainerInner>
-            <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-              <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                <NavLink href="/about">About</NavLink>
-                <NavLink href="/experience">Experience</NavLink>
-                <NavLink href="/articles">Articles</NavLink>
-                <NavLink href="/projects">Projects</NavLink>
-                {/* <NavLink href="/speaking">Speaking</NavLink> */}
-                {/* <NavLink href="/uses">Uses</NavLink> */}
-              </div>
-              <p className="text-sm text-zinc-400 dark:text-zinc-500">
-                &copy; {new Date().getFullYear()} Gideon Nwokpor. All rights
-                reserved.
-              </p>
-            </div>
-          </ContainerInner>
+    <footer className="border-t border-[#1A1A1A] bg-[#0A0A0A]">
+      <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+          <Link
+            href="/"
+            className="font-[family-name:var(--font-syne)] text-sm font-bold text-[#F5F5F5]"
+          >
+            Gideon<span className="text-[#00D4FF]">.</span>
+          </Link>
+
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-[#525252]">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="transition-colors hover:text-[#00D4FF]"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          <p className="text-sm text-[#525252]">
+            &copy; {new Date().getFullYear()} Gideon Nwokpor
+          </p>
         </div>
-      </ContainerOuter>
+      </div>
     </footer>
   )
 }

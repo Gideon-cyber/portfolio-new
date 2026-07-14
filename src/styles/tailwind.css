@@ -7,6 +7,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* Font sizes */
   --text-xs: 0.8125rem;
   --text-xs--line-height: 1.5rem;
   --text-sm: 0.875rem;
@@ -33,4 +34,75 @@
   --text-8xl--line-height: 1;
   --text-9xl: 8rem;
   --text-9xl--line-height: 1;
+
+  /* Design system colors */
+  --color-bg: #0A0A0A;
+  --color-surface: #111111;
+  --color-surface-raised: #1A1A1A;
+  --color-text: #F5F5F5;
+  --color-text-muted: #A1A1A1;
+  --color-text-faint: #525252;
+  --color-border: #262626;
+  --color-border-hover: #404040;
+  --color-accent: #00D4FF;
+  --color-accent-muted: oklch(from #00D4FF l c h / 0.1);
+
+  /* Font families */
+  --font-display: 'Syne', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+}
+
+/* Global resets for cinematic dark site */
+html {
+  background-color: #0A0A0A;
+  color: #F5F5F5;
+}
+
+/* Custom cursor — hide native on pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
+
+/* Smooth scroll behavior for reduced motion fallback */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #404040;
+}
+
+/* Selection color */
+::selection {
+  background-color: #00D4FF33;
+  color: #F5F5F5;
+}
+
+/* Prevent cursor:none from pushing caret-color:transparent (hydration mismatch) */
+input,
+textarea {
+  caret-color: auto;
 }
