@@ -44,7 +44,6 @@ function transformHashnodeArticle(
     isExternal: true,
     url: hashnodeArticle.url,
     readTime: hashnodeArticle.readTime,
-    views: hashnodeArticle.views,
     tags: hashnodeArticle.tags,
     coverImage: hashnodeArticle.coverImage,
   }
@@ -53,16 +52,15 @@ function transformHashnodeArticle(
 export async function getAllArticles(): Promise<ArticleWithSlug[]> {
   // Only get Hashnode articles (skip local MDX articles)
   let hashnodeArticles: ArticleWithSlug[] = []
-  const hashnodeUsername = process.env.HASHNODE_USERNAME
+  const hashnodeHost = process.env.HASHNODE_PUBLICATION_HOST
 
-  if (hashnodeUsername && hashnodeUsername !== 'your-username') {
+  if (hashnodeHost) {
     try {
-      // console.log('Fetching Hashnode articles only...')
-      const hashnodeData = await getUserHashnodeArticles(hashnodeUsername, 20)
+      const hashnodeData = await getUserHashnodeArticles(
+        `https://${hashnodeHost}/rss.xml`,
+        20,
+      )
       hashnodeArticles = hashnodeData.map(transformHashnodeArticle)
-      // console.log(
-      //   `Successfully fetched ${hashnodeArticles.length} Hashnode articles`,
-      // )
     } catch (error) {
       console.error('Failed to fetch Hashnode articles:', error)
       console.log('No articles available due to Hashnode fetch error')
@@ -70,7 +68,7 @@ export async function getAllArticles(): Promise<ArticleWithSlug[]> {
       return []
     }
   } else {
-    console.log('Hashnode integration disabled - no username configured')
+    console.log('Hashnode integration disabled - no publication host configured')
     return []
   }
 
