@@ -79,9 +79,23 @@ export default function Experience() {
       <div className="space-y-20">
         <ExperienceSection title="Professional Experience">
           <Role
+            role="Senior Software Engineer (Team Lead)"
+            company="Ayana Dev Studio"
+            date="Oct 2025 – Present"
+            location="Remote"
+            achievements={[
+              'Serve as the technical lead and architect across multiple products, owning technical vision, system design, and end-to-end delivery in a fast-moving startup environment',
+              'Drive architecture decisions across React.js and Node.js applications, establishing standards for code quality, component design, and API contracts adopted across the engineering team',
+              'Led the release of 4 production web and mobile apps from concept to launch, including App Store, Play Store, and Chrome Web Store submissions',
+              'Reduced deployment cycles by 40% through CI/CD automation, enabling faster iteration without sacrificing stability',
+              'Collaborate directly with founding team members to align technical direction with product vision and business goals',
+            ]}
+          />
+
+          <Role
             role="Software Engineer"
             company="Temlio Telecommunications"
-            date="Dec 2024 – Present"
+            date="Dec 2024 – Nov 2025"
             location="Remote, Lagos, Nigeria"
             achievements={[
               'Engineered a centralized messaging system unifying phone, email, SMS, and social media into one inbox, reducing platform context-switching by 100%',
@@ -142,6 +156,7 @@ export default function Experience() {
               skills={[
                 'JavaScript',
                 'TypeScript',
+                'Python',
                 'Dart',
                 'Solidity',
                 'Node.js',
