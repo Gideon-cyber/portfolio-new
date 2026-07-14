@@ -14,8 +14,80 @@ import logoDhelc from '@/images/logos/DHELC_logo.jpeg'
 import logoStealthStartup from '@/images/logos/stealth_startup_logo.jpeg'
 import logoCronkcro from '@/images/logos/cronkcro.webp'
 import logoComlio from '@/images/logos/comlio.png'
+import logoTeddyEd from '@/images/logos/logo-teddyed.png'
+import logoMango from '@/images/logos/logo-mango.png'
+import logoPatentTrail from '@/images/logos/logo-patenttrail.png'
+import logoRootCause from '@/images/logos/logo-rootcause.png'
+import logoWillTheyConvert from '@/images/logos/logo-willtheyconvert.png'
+import logoYouversity from '@/images/logos/logo-youversity.png'
 
 const projects = [
+  {
+    name: 'TeddyEd School Management System',
+    description:
+      'Lead Engineer for a cloud-based school management platform serving K-12 institutions. Streamlines admissions, attendance, scheduling, report cards, and parent-teacher communication in one system.',
+    link: {
+      href: 'https://www.teddyed.tech/',
+      label: 'teddyed.tech',
+    },
+    logo: logoTeddyEd,
+    technologies: ['React.js', 'Node.js', 'Cloud Infrastructure'],
+  },
+  {
+    name: 'Mango Entertainment Streaming Platform',
+    description:
+      'Lead Engineer for a mobile-first live streaming and entertainment platform. Built live streaming, on-demand content, and creator monetization features for a socially-engaged audience.',
+    link: {
+      href: 'https://www.mangoentertainment.com/',
+      label: 'mangoentertainment.com',
+    },
+    logo: logoMango,
+    technologies: ['React.js', 'Live Streaming APIs', 'Mobile'],
+  },
+  {
+    name: 'PatentTrail Patent Monitoring Platform',
+    description:
+      'Lead Engineer for an AI-powered patent monitoring tool for attorneys, inventors, and researchers. Delivers real-time filing alerts, watchlists, and AI-generated summaries across web and mobile apps.',
+    link: {
+      href: 'https://www.patenttrail.com/',
+      label: 'patenttrail.com',
+    },
+    logo: logoPatentTrail,
+    technologies: ['React.js', 'AI/ML', 'iOS', 'Android'],
+  },
+  {
+    name: 'RootCause Mind-Body Health Tracker',
+    description:
+      'Lead Engineer for a mind-body health app that helps users connect physical symptoms to emotional root causes. Built symptom tracking, AI-generated insight reports, and personalized affirmations.',
+    link: {
+      href: 'https://rootcause.my/',
+      label: 'rootcause.my',
+    },
+    logo: logoRootCause,
+    technologies: ['React.js', 'AI/ML', 'REST APIs'],
+  },
+  {
+    name: 'WillTheyConvert Idea Validation Platform',
+    description:
+      'Lead Engineer for a validation platform that lets entrepreneurs test product ideas and gauge market interest before building. Helps founders de-risk launches with structured customer feedback.',
+    link: {
+      href: 'https://willtheyconvert.com/',
+      label: 'willtheyconvert.com',
+    },
+    logo: logoWillTheyConvert,
+    technologies: ['React.js', 'Node.js', 'PostgreSQL'],
+  },
+  {
+    name: 'YouVersity AI Learning Platform',
+    description:
+      'Lead Engineer for an AI-powered platform that turns YouTube videos into structured courses. Curates and sequences videos by topic, then reinforces retention with AI-generated quizzes.',
+    link: {
+      href: 'https://youversity.io/',
+      label: 'youversity.io',
+    },
+    logo: logoYouversity,
+    technologies: ['React.js', 'AI/ML', 'Node.js'],
+  },
   {
     name: 'Cronkcro Web3 Website',
     description:
